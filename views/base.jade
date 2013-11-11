@@ -1,0 +1,22 @@
+!!! 5
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+        title=title
+        meta(name="viewport", content='width=device-width, initial-scale=1')
+        script(type='text/javascript')
+          var port = #{port}
+        != css('style')
+    body                
+        block content
+        script(src="/socket.io/socket.io.js")
+        script(src="js/lib/underscore.js")
+        script(src="js/lib/jquery.js")
+        script(src="js/lib/address.js")
+        script(src="js/lib/jsrender.js")
+        script(src="js/lib/hammer.js")
+        script(src="js/lib/ee.js")
+        script(src="js/lib/caress.js")
+        script(src="js/lib/iscroll-lite.js")
+        != js('main')
