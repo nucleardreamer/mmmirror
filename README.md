@@ -1,6 +1,8 @@
 mmmirror
 ======
 
+A semi-magic mirror framework, based on node.js and TUIO.
+
 mmmirror system
 ------
 
@@ -16,6 +18,19 @@ to install:
 to run:
 
     npm start
+
+Alternatively, you can load the whole running on the project with the handy init.d script in the `/scripts` folder:
+
+    sudo mkdir /var/node/
+    cd /var/node && sudo git clone https://github.com/nucleardreamer/mmmirror.git
+    npm install -g forever
+    sudo npm install
+    // copy the file to /etc/init.d/mmmirror
+    sudo su
+    chmod a+x /etc/init.d/mmmirror
+    update-rc.d mmmirror defaults
+
+After that, simply run `sudo service mmmirror restart`, `stop`, or `start`
 
 how it runs
 ------
