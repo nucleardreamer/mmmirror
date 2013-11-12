@@ -1,4 +1,5 @@
 @import "vars";
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,300italic,400italic,700italic);
 
 ::-webkit-scrollbar {width:0;height:0;}
 html, body {margin:0;padding:0;}
@@ -36,3 +37,80 @@ input {
 	border:1px solid #222;
 } 
 ::-webkit-input-placeholder {text-transform:none;}
+
+#container{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	cursor: none;
+	color: #00B8FF;
+	-webkit-box-sizing: border-box;
+	-webkit-transform: translate3d(0, 0, 0);
+}
+
+@containerLeft: 50px;
+@calendarWidth: 168px;
+.uiHidden #calendar{
+	opacity: 0;
+	left: 60px;
+}
+.uiHidden #weather{
+	opacity: 0;
+	left: 60px;
+}
+
+#weather{
+	position: absolute;
+	top: 100px;
+	left: @containerLeft;
+	font-weight: 300;
+	-webkit-transition: all .6s ease;
+
+	.place{
+		font-size: 5em;
+		text-transform: uppercase;
+	}
+	.desc{
+		font-size:2em;
+	}
+	.temp{
+		font-size: 10em;
+		font-weight: 100;
+	}
+}
+
+#calendar{
+	position: absolute;
+	bottom: 200px;
+	width: 100%;
+	left: @containerLeft;
+	-webkit-transition: all .6s ease .1s;
+
+	.date{
+		position: absolute;
+		top: 11px;
+		left: 75px;
+		font-size: 3em;
+		font-weight: 300;
+	}
+	i{
+		font-size:5em;
+
+	}
+}
+
+#clock{
+	position: absolute;
+	bottom: 30px;
+	left: @containerLeft;
+	text-align: center;
+	.text{
+		font-size: 10em;
+	}
+}

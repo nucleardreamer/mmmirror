@@ -7,6 +7,7 @@ html
         meta(name="viewport", content='width=device-width, initial-scale=1')
         script(type='text/javascript')
           var port = #{port}
+        link(rel='stylesheet',href='css/font-awesome.css')
         != css('style')
     body
         block content
@@ -18,5 +19,6 @@ html
         script(src="js/lib/hammer.js")
         script(src="js/lib/ee.js")
         script(src="js/lib/caress.js")
+        script(src="js/lib/moment.js")
         script(src="js/lib/iscroll-lite.js")
         != js('main')

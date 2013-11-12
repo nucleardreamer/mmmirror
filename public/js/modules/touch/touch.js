@@ -16,6 +16,26 @@ mmmirror.__proto__._touch = function() {
 		});
 		client.connect();
 		
+		var uiOn = false, timeoutFunc, timeoutBool = true;
+
+		$('body').hammer().on('tap', function(){
+			if(timeoutBool){
+				timeoutBool = false;
+				timeoutFunc = setTimeout(function(){
+					uiOn = (uiOn) ? false : true;
+					if(uiOn){
+						$(_this.args.selectors.main).removeClass('uiHidden')
+					} else {
+						$(_this.args.selectors.main).addClass('uiHidden')
+					}
+					_this.event('ui.overlay').push({
+						on: uiOn
+					});
+					timeoutBool = true;
+				}, 50);
+			}
+		});
+
 		return dfd.resolve();
 	})();
 

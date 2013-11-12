@@ -106,6 +106,12 @@ var mmmirror = (function() {
 
 })(jQuery)
 
+$.views.helpers({ 
+	weatherDesc: function(arr){
+		return arr.join(', ');
+	} 
+});
+
 mmmirror = new mmmirror({
 	name: 'mmmirror',
 	defaultPage: '/',

@@ -21,13 +21,13 @@ mmmirror.__proto__._api = function() {
 
 	// do setup to return a resolve or reject
 	(function() {
-		_this.event('api.test').listen(search);
+		_this.event('api.weather').listen(weatherApi);
 		return dfd.resolve();
 	})();
 
-	function search(d) {
-		_this.event('api.test').respush(d.q, d.summary, function(data) {
-			d.cb(data);
+	function weatherApi(cb){
+		_this.event('api.weather').respush(function(data) {
+			cb(data);
 		});
 	}
 
