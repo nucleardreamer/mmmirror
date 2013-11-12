@@ -32,8 +32,8 @@ require('./cfg').cfg(app);
 require('./routes/index')(app, settings);
 
 var server = http.createServer(app);
-
-var es = require('./lib/socketServer')(server, ee, false);
+var spotify = require('./lib/spotify')();
+var es = require('./lib/socketServer')(server, ee, false, spotify);
 
 server.listen(settings.port, function() {
     console.log("Express server listening on " + " port %d ".bold.inverse.red + " in " + " %s mode ".bold.inverse.green + " with " + "debug flag: %s ".bold.inverse.yellow + " //", settings.port, env, settings.debug);

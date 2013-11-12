@@ -18,7 +18,7 @@ mmmirror.__proto__._touch = function() {
 		
 		var uiOn = false, timeoutFunc, timeoutBool = true;
 
-		$('body').hammer().on('tap', function(){
+		$('body').hammer().on('tap', '*:not([touch])', function(e){
 			if(timeoutBool){
 				timeoutBool = false;
 				timeoutFunc = setTimeout(function(){
@@ -26,11 +26,14 @@ mmmirror.__proto__._touch = function() {
 					if(uiOn){
 						$(_this.args.selectors.main).removeClass('uiHidden')
 					} else {
-						$(_this.args.selectors.main).addClass('uiHidden')
+						if(!$(e.target).is('[touch]')){
+							$(_this.args.selectors.main).addClass('uiHidden')							
+						}
 					}
 					_this.event('ui.overlay').push({
 						on: uiOn
 					});
+
 					timeoutBool = true;
 				}, 50);
 			}

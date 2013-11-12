@@ -106,10 +106,21 @@ var mmmirror = (function() {
 
 })(jQuery)
 
-$.views.helpers({ 
-	weatherDesc: function(arr){
+$.views.helpers({
+	log: function(d){
+		console.log(d);
+		return '';
+	},
+	commaJoinArray: function(arr){
 		return arr.join(', ');
-	} 
+	},
+	joinArtists: function(arr){
+		var toRet = [];
+		_.each(arr, function(e){
+			toRet.push(e.name);
+		});
+		return toRet.join(', ');
+	}
 });
 
 mmmirror = new mmmirror({

@@ -1,0 +1,21 @@
+<script id="spotifyTmpl">
+	<div id="spotify" touch>
+		<span class="text">spotify</span>
+	</div>
+	<div id="playlists" class="hidden" touch></div>
+</script>
+<script id="playlistsTmpl">
+	<div class="text">playlists</div>
+	{{for playlists}}
+		<div data-uri="{{:#data.uri}}">{{:#data.attributes.name}}</div>
+	{{/for}}
+</script>
+<script id="tracksTmpl">
+	<div class="text">tracks</div>
+	{{for tracks}}
+		<div data-uri="{{:#data.uri}}" class="track" touch>
+			<div class="name">{{:#data.data.name}}</div>
+			<div class="artist">{{:~joinArtists(#data.data.artist)}}&nbsp;&nbsp;/&nbsp;&nbsp;{{:#data.data.album.name}}</div>
+		</div>
+	{{/for}}
+</script>

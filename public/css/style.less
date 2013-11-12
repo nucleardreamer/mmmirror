@@ -64,13 +64,61 @@ input {
 	opacity: 0;
 	left: 60px;
 }
+.uiHidden #clock{
+	opacity: 0;
+	left: 60px;
+}
+.uiHidden #spotify{
+	opacity: 0;
+	left: 60px;
+}
+
+#spotify{
+	position: absolute;
+	font-size: 5em;
+	width: 500px;
+	height: 300px;
+	top: 500px;
+	left: @containerLeft;
+}
+#playlists.hidden{
+	display: none;
+	opacity: 0;
+}
+#playlists {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	right: 50px;
+	bottom: 50px;
+	background-color: #000;
+	z-index: 100;
+	font-size: 3em;
+	font-weight: 300;
+	opacity: 1;
+	-webkit-transition: all .6s ease;
+	& > div {
+		margin-bottom: 15px;
+	}
+	.text{
+		font-size: 3em;
+		font-weight: 100;
+		margin-bottom: 40px;
+	}
+	.track{
+		.artist{
+			font-size: .5em
+		}
+	}
+}
+
 
 #weather{
 	position: absolute;
 	top: 100px;
 	left: @containerLeft;
 	font-weight: 300;
-	-webkit-transition: all .6s ease;
+	-webkit-transition: all .6s ease .2s;
 
 	.place{
 		font-size: 5em;
@@ -110,6 +158,8 @@ input {
 	bottom: 30px;
 	left: @containerLeft;
 	text-align: center;
+	-webkit-transition: all .6s ease;
+
 	.text{
 		font-size: 10em;
 	}
