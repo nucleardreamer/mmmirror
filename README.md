@@ -40,7 +40,7 @@ The client side exposes a prototype object called `event` which has three method
     });
 
 ### modules
-Client side "modules" are nothing more than scripts that return a `Deffered()` object. jsRender templates in the same folder are automatically loaded as well, so that the namespace is ready for the module (or any other module) to use.
+Client side "modules" are nothing more than scripts that return a `Deferred()` object. jsRender templates in the same folder are automatically loaded as well, so that the namespace is ready for the module (or any other module) to use.
 
 Here is an example blank module.
 
