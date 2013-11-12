@@ -39,6 +39,27 @@ The client side exposes a prototype object called `event` which has three method
       }
     });
 
+### modules
+Client side "modules" are nothing more than scripts that return a `Deffered()` object. jsRender templates in the same folder are automatically loaded as well, so that the namespace is ready for the module (or any other module) to use.
+
+Here is an example blank module.
+
+    mmmirror.__proto__._blank = function(data) {
+    
+    	var dfd 	= $.Deferred(),
+    		_this 	= this;
+    	
+    	// do setup to return a resolve or reject
+    	(function(){
+    		dfd.resolve();
+    	})();
+    	
+    	// return a promise to that we can resolve it
+    	return dfd.promise();
+    
+    }
+    // script source mapping so we can keep tabs in our browsers inspector
+    //@ sourceURL=js/modules/blank/blank.js
 
 
 
