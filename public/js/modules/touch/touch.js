@@ -18,22 +18,17 @@ mmmirror.__proto__._touch = function() {
 		
 		var uiOn = false, timeoutFunc, timeoutBool = true;
 
-		$('body').hammer().on('tap', '*:not([touch])', function(e){
+		$('body').hammer().on('tap', function(e){
 			if(timeoutBool){
 				timeoutBool = false;
 				timeoutFunc = setTimeout(function(){
-					uiOn = (uiOn) ? false : true;
-					if(uiOn){
-						$(_this.args.selectors.main).removeClass('uiHidden')
-					} else {
-						if(!$(e.target).is('[touch]')){
-							$(_this.args.selectors.main).addClass('uiHidden')							
-						}
+					var target = $(e.target);
+					console.log(target)
+					if(target.attr('data-link')){
+						$.address.value(target.attr('data-link'));
+					} else if(!target.attr('data-action')){
+						$.address.value(target.parent('[data-link]').attr('data-link'));
 					}
-					_this.event('ui.overlay').push({
-						on: uiOn
-					});
-
 					timeoutBool = true;
 				}, 50);
 			}

@@ -1,31 +1,37 @@
 <script id="spotifyTmpl">
-	<div id="spotify" touch>
+	<div id="spotify" data-link="playlist">
+		<i class="fa fa-arrow-circle-o-right"></i>
 		<span class="text">spotify</span>
 	</div>
-	<div id="playlists" class="hidden" touch></div>
+</script>
+<script id="playlistTmpl">
+	<div id="playlist" class="page"></div>
 </script>
 <script id="playlistsTmpl">
 	<div class="text">playlists</div>
 	{{for playlists}}
-		<div data-uri="{{:#data.uri}}">{{:#data.attributes.name}}</div>
+		<div data-action="{{:#data.uri}}">{{:#data.attributes.name}}</div>
 	{{/for}}
 </script>
-<script id="tracksTmpl">
+<script id="trackTmpl">
+	<div id="tracks" class="page"></div>
+</script>
+<script id="tracksTmpl">	
 	<div class="text">tracks</div>
 	{{for tracks}}
-		<div data-uri="{{:#data.uri}}" class="track" touch>
+		<div data-action="{{:#data.uri}}" class="track">
 			<div class="name">{{:#data.data.name}}</div>
 			<div class="artist">{{:~joinArtists(#data.data.artist)}}&nbsp;&nbsp;/&nbsp;&nbsp;{{:#data.data.album.name}}</div>
 		</div>
 	{{/for}}
 </script>
 <script id="playerTmpl">
-	<div id="player" class="loading" touch>
+	<div id="player" class="loading">
 		<div class="controls">
-			<i class="play fa fa-play-circle" touch></i>
-			<i class="pause fa fa-pause" touch></i>
+			<i class="play fa fa-play-circle"></i>
+			<i class="pause fa fa-pause"></i>
 		</div>
-		<div id="loader" class="loading" touch></div>
+		<div id="loader" class="loading"></div>
 		<audio></audio>
 	</div>
 </script>

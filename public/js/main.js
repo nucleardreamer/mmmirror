@@ -132,8 +132,9 @@ $.views.helpers({
 
 mmmirror = new mmmirror({
 	name: 'mmmirror',
-	defaultPage: '/',
+	defaultPage: '/off',
 	selectors: {
-		main: '#container'
+		main: '#container',
+		front: '#front'
 	}
 });

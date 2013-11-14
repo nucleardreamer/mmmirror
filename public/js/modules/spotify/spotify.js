@@ -10,18 +10,12 @@ mmmirror.__proto__._spotify = function(data) {
 	// do setup to return a resolve or reject
 	(function(){
 		_this.event('templatesLoaded').listen(renderSpotify);
-		$('body').hammer().on('tap', '#spotify',function(){
-			if(!$(_this.args.selectors.main).hasClass('uiHidden')){
-				$('#playlists').css('display','block').removeClass('hidden');
-			}
+
+		$('body').hammer().on('tap', '#playlist div[data-action]', function(){
+			renderTracks($(this).attr('data-action'));
 		});
-		$('body').hammer().on('tap', '#playlists div[data-uri]', function(){
-			var thisUri = $(this).attr('data-uri');
-			if($(this).hasClass('track')){
-				playTrack(thisUri)
-			} else {
-				renderTracks(thisUri)
-			}
+		$('body').hammer().on('tap', '#tracks div[data-action]', function(){
+			playTrack($(this).attr('data-action'))
 		});
 		$('body').hammer().on('tap', '#player .controls i', function(){
 			var btn = $(this),
@@ -36,22 +30,21 @@ mmmirror.__proto__._spotify = function(data) {
 	})();
 	
 	function renderSpotify(){
-		$(_this.args.selectors.main).append($.render.spotifyTmpl());
-
-		renderPlaylists();
-	}
-	function renderPlaylists(){
+		$(_this.args.selectors.front).append($.render.spotifyTmpl());
+		$(_this.args.selectors.main).append($.render.playlistTmpl());
+		$(_this.args.selectors.main).append($.render.trackTmpl());
 		_this.event('api.getSpotifyPlaylists').push(function(d){
-			$('#playlists').html($.render.playlistsTmpl(d)); 
+			$('#playlist').html($.render.playlistsTmpl(d)); 
 		})
 	}
 	function renderTracks(uri){
-		$('#playlists').html('loading');
+		$('#playlist').html('loading');
 		_this.event('api.getSpotifyTracks').push({
 			uri: uri,
 			cb: function(d){
 				console.log(d);
-				$('#playlists').html($.render.tracksTmpl({tracks: d})); 
+				$('#tracks').html($.render.tracksTmpl({tracks: d})); 
+				$.address.value('tracks');
 			}
 		})
 	}
@@ -66,7 +59,7 @@ mmmirror.__proto__._spotify = function(data) {
 	}
 	function playTrack(uri){
 		$('#player').remove();
-		$(_this.args.selectors.main).append($.render.playerTmpl());
+		$(_this.args.selectors.front).append($.render.playerTmpl());
 		canvasLoader();
 		_this.binaryStream = _this.binaryClient.createStream({song: uri});
 		var parts = [],
@@ -84,7 +77,7 @@ mmmirror.__proto__._spotify = function(data) {
 			player.src = url;
 			player.play();
 		});
-		$('#playlists').css('display','none').addClass('hidden');
+		$.address.value('front');
 	}
 	return dfd.promise();
 

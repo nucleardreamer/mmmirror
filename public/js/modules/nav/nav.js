@@ -24,6 +24,7 @@ mmmirror.__proto__._nav = function() {
 		// default page setup if it exists
 		if (typeof defaultPage !== 'undefined' && defaultPage) {
 			if (curPage !== defaultPage) $.address.value(defaultPage);
+			$('#'+defaultPage.replace('/','')).addClass('transIn');
 			curPage = defaultPage;
 		}
 		_this.event('nav.init').push({
@@ -44,6 +45,11 @@ mmmirror.__proto__._nav = function() {
 				next: e.path
 			});
 			lastPage = e.path;
+			$('.page')
+				.filter('.transIn')
+				.removeClass('transIn').addClass('transOut').end()
+				.filter('#'+e.path.replace('/',''))
+				.addClass('transIn')
 		})
 	}
 

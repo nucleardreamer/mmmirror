@@ -11,20 +11,11 @@ mmmirror.__proto__._clock = function(data) {
 	// do setup to return a resolve or reject
 	(function(){
 		_this.event('templatesLoaded').listen(startClock);
-		_this.event('ui.overlay').listen(showCalendar);
 		dfd.resolve();
 	})();
-	
-	function showCalendar(d){
-		if(d.on){
-			$('#calendar').removeClass('hidden')
-		} else {
-			$('#calendar').addClass('hidden')
-		}
-	}
 
 	function startClock(store){
-		$(_this.args.selectors.main).append($.render.clockTmpl()); 
+		$(_this.args.selectors.front).append($.render.clockTmpl()); 
 		clock = setInterval(function(){
 			var date = moment().format('dddd, MMMM DD'),
 				time = moment().format('hh:mm:ss A');
