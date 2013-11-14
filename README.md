@@ -12,12 +12,13 @@ You will need to have either some sort of TUIO device sending data to port 3333,
 
 to install:
 
-    sudo apt-get install libasound2-dev
+    // clone the repo
     sudo npm install
+    sudo npm install -g foreman
 
 to run:
 
-    npm start
+    nf start 
 
 Alternatively, you can load the whole running on the project with the handy init.d script in the `/scripts` folder:
 
