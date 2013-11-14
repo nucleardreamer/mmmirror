@@ -11,6 +11,7 @@ There are quite a lot of things that this project depends on. You will need to h
 You will need to have either some sort of TUIO device sending data to port 3333, or a touch device to use the UI, it is currently bound to hammer.js taps.
 
 to install:
+
     // clone the repo
     sudo npm install
     sudo npm install -g foreman
