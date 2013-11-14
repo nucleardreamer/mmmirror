@@ -24,7 +24,6 @@ mmmirror.__proto__._api = function() {
 		_this.event('api.weather').listen(weatherApi);
 		_this.event('api.getSpotifyPlaylists').listen(spotifyPlaylists);
 		_this.event('api.getSpotifyTracks').listen(spotifyTracks);
-		_this.event('api.playTrack').listen(playTrack);
 		return dfd.resolve();
 	})();
 
@@ -35,11 +34,6 @@ mmmirror.__proto__._api = function() {
 	}
 	function spotifyTracks(d){
 		_this.event('api.getSpotifyTracks').respush(d.uri, function(data){
-			d.cb(data);
-		})
-	}
-	function playTrack(d){
-		_this.event('api.playTrack').respush(d.uri, function(data){
 			d.cb(data);
 		})
 	}

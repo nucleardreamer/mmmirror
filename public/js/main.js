@@ -17,10 +17,17 @@ var mmmirror = (function() {
 		_this.socket.emit('init', _this.args);
 		_this.load.scripts.call(_this);
 
+		_this.binaryClient = new BinaryClient('ws://'+window.location.hostname+':9000');
+		_this.binaryStream = null;
+		_this.binaryClient.on('open', function(){
+			console.log('*** binary client open')
+			_this.event('binary-open').push({});
+		})
 		_this.event('scriptsLoaded').listen(function() {
 			_this.load.templates.call(_this);
 		});
 	}
+
 	main.prototype.load = {
 
 		scripts: function() {

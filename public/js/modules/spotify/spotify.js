@@ -23,12 +23,21 @@ mmmirror.__proto__._spotify = function(data) {
 				renderTracks(thisUri)
 			}
 		});
-
+		$('body').hammer().on('tap', '#player .controls i', function(){
+			var btn = $(this),
+				audio = $('#player audio')[0];
+			if(btn.hasClass('play')){
+				audio.play();
+			} else if(btn.hasClass('pause')){
+				audio.pause();
+			}
+		});
 		dfd.resolve();
 	})();
 	
 	function renderSpotify(){
 		$(_this.args.selectors.main).append($.render.spotifyTmpl());
+
 		renderPlaylists();
 	}
 	function renderPlaylists(){
@@ -46,14 +55,36 @@ mmmirror.__proto__._spotify = function(data) {
 			}
 		})
 	}
+	function canvasLoader(){
+		var cl = new CanvasLoader('loader');
+		cl.setColor('#00b7ff'); // default is '#000000'
+		cl.setDiameter(120); // default is 40
+		cl.setDensity(16); // default is 40
+		cl.setRange(1.2); // default is 1.3
+		cl.setFPS(20); // default is 24
+		cl.show(); // Hidden by default
+	}
 	function playTrack(uri){
-		_this.event('api.playTrack').push({
-			uri: uri,
-			cb: function(d){
-				console.log(d);
-				$('#playlists').css('display','none').addClass('hidden');
-			}
+		$('#player').remove();
+		$(_this.args.selectors.main).append($.render.playerTmpl());
+		canvasLoader();
+		_this.binaryStream = _this.binaryClient.createStream({song: uri});
+		var parts = [],
+			audioTrigger = true,
+			player = $("#player audio")[0],
+			playerCont = $("#player");
+
+		_this.binaryStream.on('data', function(data) {
+			parts.push(data);
 		});
+
+		_this.binaryStream.on('end', function() {
+			playerCont.removeClass('loading');
+			var url = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
+			player.src = url;
+			player.play();
+		});
+		$('#playlists').css('display','none').addClass('hidden');
 	}
 	return dfd.promise();
 
