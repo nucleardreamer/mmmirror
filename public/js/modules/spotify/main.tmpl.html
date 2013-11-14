@@ -8,7 +8,7 @@
 	<div id="playlist" class="page"></div>
 </script>
 <script id="playlistsTmpl">
-	<div class="text">playlists</div>
+	<div class="text"><i data-link="front" class="fa fa-arrow-circle-o-left"></i> playlists</div>
 	{{for playlists}}
 		<div data-action="{{:#data.uri}}">{{:#data.attributes.name}}</div>
 	{{/for}}
@@ -17,7 +17,7 @@
 	<div id="tracks" class="page"></div>
 </script>
 <script id="tracksTmpl">	
-	<div class="text">tracks</div>
+	<div class="text"><i data-link="playlist" class="fa fa-arrow-circle-o-left"></i> tracks</div>
 	{{for tracks}}
 		<div data-action="{{:#data.uri}}" class="track">
 			<div class="name">{{:#data.data.name}}</div>
@@ -31,7 +31,7 @@
 			<i class="play fa fa-play-circle"></i>
 			<i class="pause fa fa-pause"></i>
 		</div>
-		<div id="loader" class="loading"></div>
+		<div id="loading" class="loading"></div>
 		<audio></audio>
 	</div>
 </script>

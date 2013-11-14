@@ -38,7 +38,7 @@ mmmirror.__proto__._spotify = function(data) {
 		})
 	}
 	function renderTracks(uri){
-		$('#playlist').html('loading');
+		$.address.value('loader');
 		_this.event('api.getSpotifyTracks').push({
 			uri: uri,
 			cb: function(d){
@@ -49,7 +49,7 @@ mmmirror.__proto__._spotify = function(data) {
 		})
 	}
 	function canvasLoader(){
-		var cl = new CanvasLoader('loader');
+		var cl = new CanvasLoader('loading');
 		cl.setColor('#00b7ff'); // default is '#000000'
 		cl.setDiameter(120); // default is 40
 		cl.setDensity(16); // default is 40
