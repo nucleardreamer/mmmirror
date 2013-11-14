@@ -15,7 +15,12 @@ to install:
     // clone the repo
     sudo npm install
     sudo npm install -g foreman
+    
+make a .env file in the root directory
 
+    SPOTIFYUSER=username
+    SPOTIFYPASS=password
+    
 to run:
 
     nf start 
@@ -54,6 +59,9 @@ The client side exposes a prototype object called `event` which has three method
         // callback from the other side
       }
     });
+
+### streams
+All binary data has a separate socket connection using `ws`. Right now, spotify songs are the only thing streamed, but going forward I will stick with [binaryjs](https://github.com/binaryjs/binaryjs)
 
 ### modules
 Client side "modules" are nothing more than scripts that return a `Deferred()` object. jsRender templates in the same folder are automatically loaded as well, so that the namespace is ready for the module (or any other module) to use.
