@@ -18,12 +18,11 @@ mmmirror.__proto__._spotify = function(data) {
 			playTrack($(this).attr('data-action'))
 		});
 		$('body').hammer().on('tap', '#player .controls i', function(){
-			var btn = $(this),
-				audio = $('#player audio')[0];
+			var btn = $(this);
 			if(btn.hasClass('play')){
-				audio.play();
+				_this.dance.play();
 			} else if(btn.hasClass('pause')){
-				audio.pause();
+				_this.dance.pause();
 			}
 		});
 		dfd.resolve();
@@ -62,20 +61,34 @@ mmmirror.__proto__._spotify = function(data) {
 		$(_this.args.selectors.front).append($.render.playerTmpl());
 		canvasLoader();
 		_this.binaryStream = _this.binaryClient.createStream({song: uri});
+
 		var parts = [],
 			audioTrigger = true,
-			player = $("#player audio")[0],
-			playerCont = $("#player");
-
+			player = $("#player");
+		
 		_this.binaryStream.on('data', function(data) {
 			parts.push(data);
 		});
 
 		_this.binaryStream.on('end', function() {
-			playerCont.removeClass('loading');
+			player.removeClass('loading');
 			var url = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
-			player.src = url;
-			player.play();
+			//player.src = url;
+			var a = new Audio();
+			a.src=url;
+			_this.dance = new Dancer();
+			_this.dance.load(a);
+			// var kick = _this.dance.createKick({
+			//   onKick: function ( mag ) {
+			//     console.log('Kick!');
+			//   	console.log(mag);
+			//   },
+			//   offKick: function ( mag ) {
+			//   }
+			// });
+			// kick.on();
+			_this.dance.waveform( player.find('canvas.waveform')[0], { strokeStyle: '#006288', strokeWidth: 9 });
+			_this.dance.play();
 		});
 		$.address.value('front');
 	}

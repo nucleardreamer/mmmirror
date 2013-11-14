@@ -139,8 +139,9 @@ input {
 
 #player{
 	position: absolute;
-	left: @containerLeft + 50px;
+	padding-left: @containerLeft + 50px;
 	top: 900px;
+	left: 0;
 	.controls{
 		font-size: 6em;
 		i {
@@ -157,6 +158,13 @@ input {
 		.controls{
 			display: none;
 		}
+	}
+	.waveform{
+		height:500px;
+		position: absolute;
+		top: -200px;
+		left: 0;
+		z-index: -1;
 	}
 }
 #playlist,#tracks {
