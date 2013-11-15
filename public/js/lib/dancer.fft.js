@@ -15,7 +15,7 @@
       var spectrum = this.getSpectrum();
       ctx.clearRect( 0, 0, w, h );
       for ( var i = 0, l = spectrum.length; i < l && i < count; i++ ) {
-        ctx.fillRect( i * ( spacing + width ), h, width, -spectrum[ i ] * (h*6) );
+        ctx.fillRect( i * ( spacing + width ), h, width, -spectrum[ i ] * (h*4) );
       }
       if(!this.isPlaying()){
         console.log('done playing');
