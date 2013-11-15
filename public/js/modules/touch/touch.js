@@ -26,8 +26,12 @@ mmmirror.__proto__._touch = function() {
 					console.log(target)
 					if(target.attr('data-link')){
 						$.address.value(target.attr('data-link'));
+						target.addClass('active');
+						setTimeout(function(){target.removeClass('active')},500);
 					} else if(!target.attr('data-action')){
 						$.address.value(target.parent('[data-link]').attr('data-link'));
+						target.parent('[data-link]').addClass('active');
+						setTimeout(function(){target.parent('[data-link]').removeClass('active')},500);
 					}
 					timeoutBool = true;
 				}, 50);

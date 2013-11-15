@@ -26,12 +26,28 @@
 	{{/for}}
 </script>
 <script id="playerTmpl">
-	<div id="player" class="loading">
+	<div class="player loading">
+		
 		<div class="controls">
 			<i class="play fa fa-play-circle"></i>
 			<i class="pause fa fa-pause"></i>
+			<i data-link="visualizer" class="fa fa-eye"></i>
 		</div>
+		<div class="name">
+			{{:name}}
+		</div>
+		<div class="artist">
+			{{:artist}}
+		</div>
+		<div class="progress"><div class="fill"></div></div>
 		<div id="loading" class="loading"></div>
-		<canvas class="waveform" width="1080" height="500"></canvas>
+	</div>
+</script>
+<script id="visualizerTmpl">
+	<div id="visualizer" class="page">
+		<div class="close" data-link="front">
+			<i class="fa fa-arrow-circle-o-left"></i>
+		</div>
+		<canvas class="fft" width="1080" height="1920"></canvas>
 	</div>
 </script>

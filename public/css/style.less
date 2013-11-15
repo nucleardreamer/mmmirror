@@ -99,31 +99,27 @@ input {
 
 @-webkit-keyframes transInAnim {
   0% {
-    left:131px;
-    top:83px;
-    opacity:0.69;
-    -webkit-transform:  rotate(-10deg) scaleX(1) scaleY(1);
+    left:100px;
+    opacity:0.1;
+    -webkit-transform: scaleX(1) scaleY(1);
   }
   100% {
     left:0px;
-    top:0px;
     opacity:1;
-    -webkit-transform:  rotate(0deg) scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
   }
 }
 
 @-webkit-keyframes transOutAnim {
   0% {
     left:0px;
-    top:0px;
     opacity:1;
-    -webkit-transform:  rotate(0deg) scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
   }
   100% {
     left:-72px;
-    top:11px;
     opacity:0;
-    -webkit-transform:  rotate(10deg) scaleX(0.3) scaleY(0.3);
+    -webkit-transform: scaleX(0.6) scaleY(0.6);
   }
 }
 
@@ -136,12 +132,59 @@ input {
 	text-align: center;
 	padding-top: 50%;
 }
-
-#player{
+#visualizer{
+	.close{
+		position: absolute;
+		top: 50px;
+		left: 50px;
+		font-size: 6em;
+	}
+	canvas{
+		position: absolute;
+		top: 0px;
+		left: 0;
+		z-index: -1;
+	}
+	.player{
+		position: absolute;
+		top: 50px;
+		right: 50px;
+		left: auto;
+		text-align: right;
+		.fa-eye{
+			display: none;
+		}
+		.progress .fill{
+			right: 0;
+			left: auto;
+		}
+	}
+}
+.player{
 	position: absolute;
 	padding-left: @containerLeft + 50px;
 	top: 900px;
 	left: 0;
+	.name{
+		font-size: 3em;
+	}
+	.artist{
+		font-size: 1.5em;
+	}
+	.progress{
+		width: 100%;
+		border-bottom: 1px solid @blue;
+		position: relative;
+		margin-top: 25px;
+		.fill{
+			height: 10px;
+			background-color: @blue;
+			width: 1%;
+			left: 0;
+			position: absolute;
+			top: -5px;
+		}
+	}
 	.controls{
 		font-size: 6em;
 		i {
@@ -158,13 +201,6 @@ input {
 		.controls{
 			display: none;
 		}
-	}
-	.waveform{
-		height:500px;
-		position: absolute;
-		top: -200px;
-		left: 0;
-		z-index: -1;
 	}
 }
 #playlist,#tracks {

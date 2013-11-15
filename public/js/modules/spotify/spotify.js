@@ -15,9 +15,10 @@ mmmirror.__proto__._spotify = function(data) {
 			renderTracks($(this).attr('data-action'));
 		});
 		$('body').hammer().on('tap', '#tracks div[data-action]', function(){
-			playTrack($(this).attr('data-action'))
+			var item = $(this);
+			playTrack(item.attr('data-action'), item.find('.name').text(),item.find('.artist').text())
 		});
-		$('body').hammer().on('tap', '#player .controls i', function(){
+		$('body').hammer().on('tap', '.player .controls i', function(){
 			var btn = $(this);
 			if(btn.hasClass('play')){
 				_this.dance.play();
@@ -32,6 +33,8 @@ mmmirror.__proto__._spotify = function(data) {
 		$(_this.args.selectors.front).append($.render.spotifyTmpl());
 		$(_this.args.selectors.main).append($.render.playlistTmpl());
 		$(_this.args.selectors.main).append($.render.trackTmpl());
+		$(_this.args.selectors.main).append($.render.visualizerTmpl());
+
 		_this.event('api.getSpotifyPlaylists').push(function(d){
 			$('#playlist').html($.render.playlistsTmpl(d)); 
 		})
@@ -56,26 +59,45 @@ mmmirror.__proto__._spotify = function(data) {
 		cl.setFPS(20); // default is 24
 		cl.show(); // Hidden by default
 	}
-	function playTrack(uri){
-		$('#player').remove();
-		$(_this.args.selectors.front).append($.render.playerTmpl());
+	function playTrack(uri, name, artist){
+		$('.player').remove();
+		$.address.value('loader');
+		var playerTmpl = $.render.playerTmpl({
+			name: name,
+			artist: artist
+		});
+			$(_this.args.selectors.front).append(playerTmpl);
+			$('#visualizer').append(playerTmpl);	
+
 		canvasLoader();
 		_this.binaryStream = _this.binaryClient.createStream({song: uri});
 
 		var parts = [],
 			audioTrigger = true,
-			player = $("#player");
+			player = $(".player");
 		
 		_this.binaryStream.on('data', function(data) {
 			parts.push(data);
 		});
 
 		_this.binaryStream.on('end', function() {
+			$.address.value('visualizer');
 			player.removeClass('loading');
+			$()
 			var url = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
 			//player.src = url;
 			var a = new Audio();
 			a.src=url;
+
+			a.addEventListener('ended', function() {
+			    $('.player').remove();
+			    $.address.value('front');
+			}, false);
+			var progress = setInterval(function(){
+				var prog = Math.ceil((a.currentTime / a.duration)*100).toFixed(1)
+				player.find('.progress .fill').css('width',prog+'%');
+			},1000);
+
 			_this.dance = new Dancer();
 			_this.dance.load(a);
 			// var kick = _this.dance.createKick({
@@ -87,10 +109,10 @@ mmmirror.__proto__._spotify = function(data) {
 			//   }
 			// });
 			// kick.on();
-			_this.dance.waveform( player.find('canvas.waveform')[0], { strokeStyle: '#006288', strokeWidth: 9 });
+			
+			_this.dance.fft( $('#visualizer canvas')[0], { fillStyle: '#006288', width: 15, spacing: 3, count: 1024 });
 			_this.dance.play();
 		});
-		$.address.value('front');
 	}
 	return dfd.promise();
 
