@@ -3,6 +3,8 @@ mmmirror
 
 A semi-magic mirror framework, based on node.js and TUIO.
 
+[what it looks like](http://www.youtube.com/watch?v=yTkR3ulRDHU&list=UU2kdtZZOpz5PYk1eh0qf2eQ&feature=share&index=2)
+
 mmmirror system
 ------
 
